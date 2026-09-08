@@ -1,3 +1,7 @@
+//-----------------------------------------------------------------------------
+// CRobot.h
+// The robot class, which contains the robot's pose, wheel speeds, and controller.
+//-----------------------------------------------------------------------------
 #ifndef CROBOT_H
 #define CROBOT_H
 
@@ -30,7 +34,7 @@ class CRobot{
         int GetCollisionCount() const { return mCollisionCount; }
 
     private:
-    bool HasCollided( const CLoopReader& aTrack ) const;
+        bool HasCollided( const CLoopReader& aTrack ) const;
 
         //Fixed dimensions
         static const float kWheelBase;     // distance between the two wheels
