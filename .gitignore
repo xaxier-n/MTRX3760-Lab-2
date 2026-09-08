@@ -1,0 +1,6 @@
+*.o
+*.out
+A2
+TestLoopReader
+TestRender
+*:Zone.Identifier
