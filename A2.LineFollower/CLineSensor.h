@@ -1,3 +1,11 @@
+//-----------------------------------------------------------------------------
+// CLineSensor.h
+//
+// One "is there floor-line under me" sensor, rigidly mounted at a fixed
+// forward/side offset from the robot's own centre and heading. Reports a
+// plain bool rather than a distance
+//-----------------------------------------------------------------------------
+
 #ifndef CLINESENSOR_H
 #define CLINESENSOR_H
 
