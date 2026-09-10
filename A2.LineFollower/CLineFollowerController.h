@@ -20,9 +20,13 @@
 class CLineFollowerController : public CController
 {
     public:
+        // Ctor
         CLineFollowerController();
-        virtual void Step( const CPose& aPose, const CLoopReader& aTrack, float& arLeftSpeed, float& arRightSpeed ); 
-    
+
+        // See CController::Step - reads both line sensors and sets the wheel
+        // speeds needed to keep the line under mCentreSensor.
+        virtual void Step( const CPose& aPose, const CLoopReader& aTrack, float& arLeftSpeed, float& arRightSpeed );
+
     private:
         //Sensor Geometry
         static const float kForwardSensorOffset; //distance from robot centre to forward facing sensor
@@ -34,9 +38,11 @@ class CLineFollowerController : public CController
         static const float kGentleCorrection; //speed to apply when correcting course
         static const float kSharpCorrection; //speed to apply when correcting course
 
+        // Member classes
         CLineSensor mCentreSensor; //forward facing sensor
         CLineSensor mSideSensor; //side facing sensor
 
+        // Member variables
         bool mLastCorrectionSide; //Which way to search if both sensors are off the line
 };
 

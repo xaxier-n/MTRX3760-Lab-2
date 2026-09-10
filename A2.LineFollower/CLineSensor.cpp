@@ -45,7 +45,7 @@ bool CLineSensor::Sense( const CPose& aRobotPose, const CLoopReader& aTrack ) co
 
     float NearestDist = kFarThreshold; //distance from the sensor to the nearest line segment
     Vec2D Previous = Vertices.back(); //The last vertex is connected to the first
-    
+
     //Iterate through the loop's vertices, checking the distance from the sensor to each line segment
     for( const Vec2D& Current : Vertices )
     {
@@ -56,6 +56,6 @@ bool CLineSensor::Sense( const CPose& aRobotPose, const CLoopReader& aTrack ) co
         }
         Previous = Current; //Update the previous vertex
     }
-    
+
     return NearestDist < kSensorRadius; //Return true if the sensor is over the line
 }
