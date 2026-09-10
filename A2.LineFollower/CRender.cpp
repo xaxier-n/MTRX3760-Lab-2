@@ -14,7 +14,7 @@ CRender::CRender()
         mScreenWidth( 800 ),
         mScreenHeight( 600 )
 {
-    InitWindow( mScreenWidth, mScreenHeight, "TODO: Replace This Text" );
+    InitWindow( mScreenWidth, mScreenHeight, "A2 - Both Robots" );
     SetTargetFPS( 60 );
 }
 
@@ -57,6 +57,7 @@ void CRender::DrawCircle( Vec2D aPosition, int aRadius, Color aColor )
 
 void CRender::DrawLine( Vec2D aStart, Vec2D aEnd, float aThickness, Color aColor )
 {
+    // raylib's own DrawLineEx wants Vector2, not our Vec2D, so convert here.
     Vector2 Start = { aStart.x, aStart.y };
     Vector2 End = { aEnd.x, aEnd.y };
 

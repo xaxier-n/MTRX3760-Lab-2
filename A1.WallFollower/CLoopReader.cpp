@@ -150,6 +150,6 @@ bool CLoopReader::ReadFile( const std::string& arFilename )
             }
         }
     }
-    
+
     return Okay;
 }

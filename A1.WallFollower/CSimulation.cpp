@@ -10,6 +10,10 @@
 const int CSimulation::kMaxUpdates = 1100;   // enough steps for one lap of SimpleWalls.map
 
 //-----------------------------------------------------------------------------
+// mWalls is declared before mRobot in CSimulation.h, so it is already
+// constructed by the time mRobot's initialiser runs - which is what lets
+// LoadStartPose() read the map into mWalls and hand back its start pose for
+// mRobot's constructor, all within this one initialiser list.
 CSimulation::CSimulation( const std::string& aMapFilename )
     : mWalls(),
       mRender(),

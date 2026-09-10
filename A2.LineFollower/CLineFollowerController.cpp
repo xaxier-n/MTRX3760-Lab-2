@@ -43,7 +43,7 @@ void CLineFollowerController::Step( const CPose& aPose, const CLoopReader& aTrac
     // Line curving toward the side sensor, correct gently.
     else if( CentreOnLine &&SideOnLine)
     {
-        arLeftSpeed = kBaseSpeed; 
+        arLeftSpeed = kBaseSpeed;
         arRightSpeed = kBaseSpeed * kGentleCorrection; //Correct gently to the right
         mLastCorrectionSide = true; //
         return;
@@ -51,13 +51,13 @@ void CLineFollowerController::Step( const CPose& aPose, const CLoopReader& aTrac
     // Line curving away from the centresensor, correct sharply.
     else if( !CentreOnLine &&SideOnLine)
     {
-        arLeftSpeed = kBaseSpeed; 
+        arLeftSpeed = kBaseSpeed;
         arRightSpeed = kBaseSpeed * kSharpCorrection; //Correct sharply to the right
         mLastCorrectionSide = true; //
         return;
     }
     //Lost the line, search in the last correction of the line.
-    else 
+    else
     {
         if (mLastCorrectionSide)
         {
@@ -67,7 +67,7 @@ void CLineFollowerController::Step( const CPose& aPose, const CLoopReader& aTrac
         }
         else
         {
-            arLeftSpeed = kBaseSpeed; 
+            arLeftSpeed = kBaseSpeed;
             arRightSpeed = kBaseSpeed * kSharpCorrection; //Correct sharply to the right
             return;
         }

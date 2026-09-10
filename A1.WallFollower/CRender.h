@@ -62,6 +62,9 @@
 #include "raylib.h"
 
 //-----------------------------------------------------------------------------
+// A simple 2D point/vector, used everywhere in place of raylib's own Vector2
+// so headers outside CRender don't need to include raylib.h.
+//-----------------------------------------------------------------------------
 struct Vec2D
 {
     float x;
@@ -73,15 +76,15 @@ class CRender
 {
     public:
         //---Ctor/Dtor---
-        CRender();
+        CRender();   // opens the window and sets the target framerate
 
         //---Util---
-        bool WindowShouldClose();
+        bool WindowShouldClose();   // true once the user has asked to close the window
         void CloseWindow();
 
         //---Drawing---
-        void BeginDrawing();
-        void EndDrawing();
+        void BeginDrawing();   // start a frame (clears the background)
+        void EndDrawing();     // present the finished frame
 
         void DrawCircle( Vec2D aPosition, int aRadius, Color aColor );
         void DrawLine( Vec2D aStart, Vec2D aEnd, float aThickness, Color aColor );

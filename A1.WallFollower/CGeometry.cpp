@@ -12,7 +12,7 @@ const float CGeometry::kParallelEpsilon = 1e-6f; //Threshold for considering two
 float CGeometry::DistanceFromPointToSeg( Vec2D aPoint, Vec2D aSegStart, Vec2D aSegEnd )
 {
     Vec2D SegVector = { aSegEnd.x - aSegStart.x, aSegEnd.y - aSegStart.y }; //Vector from start to end of segment
-    Vec2D PointVector = { aPoint.x - aSegStart.x, aPoint.y - aSegStart.y }; //Vector from start of segment to point 
+    Vec2D PointVector = { aPoint.x - aSegStart.x, aPoint.y - aSegStart.y }; //Vector from start of segment to point
 
     float SegLengthSquared = SegVector.x * SegVector.x + SegVector.y * SegVector.y; //Squared length of the segment
 
