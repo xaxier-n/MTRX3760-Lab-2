@@ -1,3 +1,14 @@
+//-----------------------------------------------------------------------------
+// CLineSensor.cpp
+//
+// Rotates this sensor's fixed (forward, side) mounting offset by the robot's
+// current heading to get the sensor's actual position in world space, then
+// checks that position against every segment of the track via
+// CGeometry::DistanceFromPointToSeg, keeping only the nearest one. The
+// sensor counts as "over the line" if that nearest distance is within
+// kSensorRadius.
+//-----------------------------------------------------------------------------
+
 #include "CLineSensor.h"
 #include "CGeometry.h"
 
