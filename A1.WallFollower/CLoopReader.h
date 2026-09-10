@@ -60,12 +60,12 @@ class CLoopReader
         CLoopReader();
 
         //---File reading---
-        bool ReadFile( const std::string& arFilename );
+        bool ReadFile( const std::string& arFilename );   // parse arFilename; returns false and logs on any error
 
         //---Access to the loop that was read---
-        const std::string& GetName() const;
-        const CPose& GetStartPose() const;
-        const std::vector<Vec2D>& GetVertices() const;
+        const std::string& GetName() const;          // the loop's name (from the 'loop' line)
+        const CPose& GetStartPose() const;            // the loop's starting pose (from the 'startpose' line)
+        const std::vector<Vec2D>& GetVertices() const;   // the loop's corners, in file order
 
     private:
         //---The loop---

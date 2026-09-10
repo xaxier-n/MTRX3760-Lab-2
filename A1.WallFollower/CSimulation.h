@@ -39,9 +39,9 @@ class CSimulation
         static const int kMaxUpdates;   // enough steps for one lap of the map
 
         //---The world---
-        CLoopReader mWalls;
-        CRender mRender;
-        CRobot mRobot;
+        CLoopReader mWalls;   // the room's walls, read from the map file
+        CRender mRender;      // the window/renderer
+        CRobot mRobot;        // the wall-following robot
 };
 
 #endif

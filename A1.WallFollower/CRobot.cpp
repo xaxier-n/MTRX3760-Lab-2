@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// CRobot.cpp 
+// CRobot.cpp
 //-----------------------------------------------------------------------------
 #include "CRobot.h"
 #include "CGeometry.h"
@@ -38,7 +38,7 @@ void CRobot::Update( const CLoopReader& aTrack )
     //Call the controller to get the new wheel speeds
     mController->Step( mPose, aTrack, mLeftSpeed, mRightSpeed );
 
-    //Update the robot's pose based on the wheel speeds
+    //Update the robot's pose based on the wheel speeds (differential drive kinematics)
     const float LinearSpeed = ( mLeftSpeed + mRightSpeed ) / 2.0f;
     const float AngularSpeed = ( mRightSpeed - mLeftSpeed ) / kWheelBase; // radians per second
 
@@ -48,6 +48,8 @@ void CRobot::Update( const CLoopReader& aTrack )
 
     mTrail.push_back( mPose.mPosition ); //Add the new position to the trail
 
+    // Only count a fresh collision (the moment contact starts), not every
+    // frame the robot happens to still be touching the wall.
     bool IsColliding = HasCollided( aTrack );
     if( IsColliding && !mWasColliding )
     {
@@ -60,7 +62,7 @@ void CRobot::Update( const CLoopReader& aTrack )
 }
 
 
-bool CRobot::HasCollided( const CLoopReader& aTrack ) const 
+bool CRobot::HasCollided( const CLoopReader& aTrack ) const
 {
     bool Collided = false;
     const std::vector<Vec2D>& Vertices = aTrack.GetVertices();
@@ -83,6 +85,7 @@ bool CRobot::HasCollided( const CLoopReader& aTrack ) const
 
 void CRobot::Draw( CRender& aRender ) const
 {
+    // Trail: a line through every past position.
     if(mTrail.size() > 1 )
     {
         for(std::size_t i=1; i < mTrail.size(); ++i )
@@ -94,6 +97,8 @@ void CRobot::Draw( CRender& aRender ) const
 
 aRender.DrawCircle( mPose.mPosition, kRadius, BLUE );
 
+// A short line from the centre out to the edge of the body, in the current
+// heading direction, so the robot's facing is visible on screen.
 Vec2D Nose{ mPose.mPosition.x + kRadius * std::cos( mPose.mHeading ),
             mPose.mPosition.y + kRadius * std::sin( mPose.mHeading ) };
 aRender.DrawLine( mPose.mPosition, Nose, 2.0f, BLACK );

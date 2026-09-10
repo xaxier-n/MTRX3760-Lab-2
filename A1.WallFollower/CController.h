@@ -12,7 +12,12 @@ class CLoopReader;
 class CController
 {
     public:
-        virtual ~CController () {}
+        // Interface
+        virtual ~CController () {}   // virtual so deleting via a CController* (as CRobot does) destroys the real derived controller
+
+        // Called once per simulation step. Implementations read the robot's
+        // current aPose and whatever they can see of aTrack, then write the
+        // wheel speeds they want into arLeftSpeed/arRightSpeed.
         virtual void Step( const CPose& aPose, const CLoopReader& aTrack, float& arLeftSpeed, float& arRightSpeed ) = 0;
 };
 

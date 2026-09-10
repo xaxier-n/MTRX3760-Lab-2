@@ -15,11 +15,14 @@
 class CRobot{
     public:
        //---Ctor/Dtor---
+        // aStartPose: initial pose. aLabel: name used in on-screen/console
+        // reporting. apController: the steering behaviour to drive this robot;
+        // CRobot takes ownership and deletes it in the destructor.
         CRobot( CPose aStartPose, std::string aLabel, CController* apController );
-        virtual ~CRobot();
+        virtual ~CRobot();   // deletes mController
 
-        void Update( const CLoopReader& aTrack );
-        void Draw( CRender& aRender ) const;
+        void Update( const CLoopReader& aTrack );   // one simulation step: ask the controller for wheel speeds, move, check collision
+        void Draw( CRender& aRender ) const;         // draw the trail, body and heading nose
 
         //---Access---
         const std::string& GetLabel() const { return mLabel; }
@@ -34,23 +37,25 @@ class CRobot{
         int GetCollisionCount() const { return mCollisionCount; }
 
     private:
-        bool HasCollided( const CLoopReader& aTrack ) const;
+        // Private helper functions
+        bool HasCollided( const CLoopReader& aTrack ) const;   // true if the body circle overlaps any wall segment of aTrack
 
         //Fixed dimensions
         static const float kWheelBase;     // distance between the two wheels
         static const float kRadius;        // drawn body radius, and collision radius
         static const float kFixedTimestep; // seconds simulated per Update() call
 
-        CController* mController;
-        CPose mPose;
-        float mLeftSpeed;
-        float mRightSpeed;
-        std::string mLabel;
-        std::vector<Vec2D> mTrail;
-        int mUpdateCount;
-        int mCollisionCount;
-        bool mWasColliding;
-        
+        // Member variables
+        CController* mController;   // steering behaviour; owned by this robot
+        CPose mPose;                 // current position and heading
+        float mLeftSpeed;            // current left wheel speed
+        float mRightSpeed;           // current right wheel speed
+        std::string mLabel;          // name used in reporting
+        std::vector<Vec2D> mTrail;   // every past position, for drawing the trail
+        int mUpdateCount;            // number of Update() calls so far
+        int mCollisionCount;         // number of collisions detected so far
+        bool mWasColliding;          // collision state on the previous Update(), so collisions are only counted once per contact
+
 };
 
 #endif
