@@ -1,6 +1,8 @@
 //-----------------------------------------------------------------------------
 // CGeometry.h
-// A collection of geometry functions
+//
+// Shortest distance from a point to a line segment, with the closest point
+// clamped to the segment's own endpoints.
 //-----------------------------------------------------------------------------
 
 #ifndef CGEOMETRY_H
