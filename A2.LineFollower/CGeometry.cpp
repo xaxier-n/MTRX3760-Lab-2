@@ -1,5 +1,10 @@
 //-----------------------------------------------------------------------------
 // CGeometry.cpp
+// Shortest distance from a point to a line segment, with the closest point
+// clamped to the segment's own endpoints (not the infinite line it sits on) -
+// so a point off either end of the segment measures distance to the nearest
+// endpoint, not to some point past it. Used by CLineSensor::Sense() to check
+// how far a sensor is from each segment of the track.
 //-----------------------------------------------------------------------------
 #include "CGeometry.h"
 
