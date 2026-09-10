@@ -1,6 +1,13 @@
 //-----------------------------------------------------------------------------
-// CSLineFollowerController.cpp 
+// CLineFollowerController.cpp
+//
+// Four-way decision each Step(): both sensors on the line means go straight;
+// the line curving toward mSideSensor triggers a gentle correction, then a
+// sharp one as mCentreSensor also loses the line; losing the line entirely
+// falls back to searching toward whichever side the last correction was
+// made, on the assumption the line is still curving that way.
 //-----------------------------------------------------------------------------
+
 #include "CLineFollowerController.h"
 
 //Sensor Geometry
