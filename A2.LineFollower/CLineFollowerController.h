@@ -1,7 +1,15 @@
 //-----------------------------------------------------------------------------
 // CLineFollowerController.h
-// The controller for the line follower robot, which uses two line sensors to follow a line.
+//
+// Line-following behaviour built from two sensors: mCentreSensor sits ahead
+// of the robot and, when tracking correctly, directly over the line;
+// mSideSensor sits offset to one side of that. As the line curves toward
+// mSideSensor's side, mSideSensor picks it up before mCentreSensor loses it,
+// giving an early "gentle correction" signal before a later "sharp
+// correction" one, and a "search" behaviour if both sensors lose the line
+// at once.
 //-----------------------------------------------------------------------------
+
 
 #ifndef CLINEFOLLOWERCONTROLLER_H
 #define CLINEFOLLOWERCONTROLLER_H
